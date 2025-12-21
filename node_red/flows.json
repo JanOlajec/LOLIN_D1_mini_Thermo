@@ -1,0 +1,1021 @@
+[
+    {
+        "id": "af55de1cad2f4bbc",
+        "type": "tab",
+        "label": "LOLIN_D1_MINI",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b17ccb13a9e08781",
+        "type": "mqtt in",
+        "z": "af55de1cad2f4bbc",
+        "name": "Technical Room Tmpr",
+        "topic": "home/technicalRoom/outdoor/temperature",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "0e745f397e5b7cec",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 100,
+        "wires": [
+            [
+                "dbfccd25c708febf",
+                "d419c0c5ce73ad48"
+            ]
+        ]
+    },
+    {
+        "id": "dbfccd25c708febf",
+        "type": "change",
+        "z": "af55de1cad2f4bbc",
+        "name": "TmprValue",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.value",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 100,
+        "wires": [
+            [
+                "9eb2e3b0f714d72b",
+                "922df0a448c41ad3"
+            ]
+        ]
+    },
+    {
+        "id": "9eb2e3b0f714d72b",
+        "type": "smooth",
+        "z": "af55de1cad2f4bbc",
+        "name": "60 to 1",
+        "property": "payload",
+        "action": "mean",
+        "count": "60",
+        "round": "",
+        "mult": "single",
+        "reduce": true,
+        "x": 630,
+        "y": 180,
+        "wires": [
+            [
+                "dfeab2d93b6b64c6"
+            ]
+        ]
+    },
+    {
+        "id": "dfeab2d93b6b64c6",
+        "type": "change",
+        "z": "af55de1cad2f4bbc",
+        "name": "RoundTo2Decimal",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(payload, 2)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 180,
+        "wires": [
+            [
+                "8f592ad7ddaa67a3"
+            ]
+        ]
+    },
+    {
+        "id": "8f592ad7ddaa67a3",
+        "type": "ui-chart",
+        "z": "af55de1cad2f4bbc",
+        "group": "65780af9cfdc3e55",
+        "name": "Tech.Tmpr 24 hours",
+        "label": "Technical Temperature [C] per 24 hours",
+        "order": 3,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "",
+        "ymax": "",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": false,
+        "removeOlder": "24",
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": "6",
+        "height": "6",
+        "className": "",
+        "interpolation": "linear",
+        "x": 1120,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "922df0a448c41ad3",
+        "type": "ui-text",
+        "z": "af55de1cad2f4bbc",
+        "group": "65780af9cfdc3e55",
+        "order": 1,
+        "width": "1",
+        "height": "1",
+        "name": "Tech.Tmpr",
+        "label": "Tmpr [C]:",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 1090,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "b9f62a3a0ddedc9b",
+        "type": "mqtt in",
+        "z": "af55de1cad2f4bbc",
+        "name": "Technical Room Humi",
+        "topic": "home/technicalRoom/outdoor/humidity",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "0e745f397e5b7cec",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 320,
+        "wires": [
+            [
+                "6f5481fe06d91848",
+                "d419c0c5ce73ad48"
+            ]
+        ]
+    },
+    {
+        "id": "6f5481fe06d91848",
+        "type": "change",
+        "z": "af55de1cad2f4bbc",
+        "name": "HumiValue",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.value",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 320,
+        "wires": [
+            [
+                "4f52241b9cb8ba0e",
+                "cea9e5aa7500fb9e"
+            ]
+        ]
+    },
+    {
+        "id": "4f52241b9cb8ba0e",
+        "type": "ui-text",
+        "z": "af55de1cad2f4bbc",
+        "group": "65780af9cfdc3e55",
+        "order": 2,
+        "width": "1",
+        "height": "1",
+        "name": "Tech.Humi",
+        "label": "Humi [%]:",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 1090,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "cea9e5aa7500fb9e",
+        "type": "smooth",
+        "z": "af55de1cad2f4bbc",
+        "name": "60 to 1",
+        "property": "payload",
+        "action": "mean",
+        "count": "60",
+        "round": "",
+        "mult": "single",
+        "reduce": true,
+        "x": 630,
+        "y": 400,
+        "wires": [
+            [
+                "0317ffec469ae1b8"
+            ]
+        ]
+    },
+    {
+        "id": "35f6286dc1676c14",
+        "type": "ui-chart",
+        "z": "af55de1cad2f4bbc",
+        "group": "65780af9cfdc3e55",
+        "name": "Tech.Humi 24 hours",
+        "label": "Technical Humidity [%] per 24 hours",
+        "order": 4,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "",
+        "ymax": "",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": false,
+        "removeOlder": "24",
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#ff0000",
+            "#0080ff",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": "6",
+        "height": "6",
+        "className": "",
+        "interpolation": "linear",
+        "x": 1120,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0317ffec469ae1b8",
+        "type": "change",
+        "z": "af55de1cad2f4bbc",
+        "name": "RoundTo2Decimal",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$round(payload, 2)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 400,
+        "wires": [
+            [
+                "35f6286dc1676c14"
+            ]
+        ]
+    },
+    {
+        "id": "d419c0c5ce73ad48",
+        "type": "join",
+        "z": "af55de1cad2f4bbc",
+        "name": "Joint T and H",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": false,
+        "accumulate": false,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 480,
+        "y": 580,
+        "wires": [
+            [
+                "9b5c1c543afad151"
+            ]
+        ]
+    },
+    {
+        "id": "9b5c1c543afad151",
+        "type": "function",
+        "z": "af55de1cad2f4bbc",
+        "name": "MQTT to InfluxDB",
+        "func": "/*\n * Input MQTT message format (msg.payload):\n * -----------------------------------------\n * {\n *   \"home/thermometer/temperature\":\n *      {\n *          \"value\":24.06, \n *          \"unit\":\"C\"\n *      },\n *   \"home/thermometer/humidity\":\n *      {\n *          \"value\":64.98,\n *          \"unit\":\"%\"\n *      }\n * }\n * \n * Output message format (InfluxDB):\n * -----------------------------------------\n * msg.measurement = measurementName;\n * msg.payload = \n * [\n *      { fields },\n *      { tags   }\n * ];\n */\n\nconst payloadIn = msg.payload;\n\n/* Define field and tag names */\nconst measurementName = \"environment\";\nconst tempTopic = \"home/technicalRoom/outdoor/temperature\";\nconst humiTopic = \"home/technicalRoom/outdoor/humidity\";\nconst deviceTag = \"home/thermometer/pristavba\";\n\n// Helper function to safely extract the 'value' field and convert it to a float.\nfunction extractAndParse(topic) {\n    const data = payloadIn[topic];\n\n    // 1. Check if the object for the topic exists\n    if (!data || data.value === null || data.value === undefined) {\n        // If data is missing or value is null/undefined, return null\n        return null;\n    }\n\n    // 2. Access the nested 'value' key and attempt conversion\n    const value = data.value;\n    \n    // parseFloat is usually safe, but check for non-numeric input for robustness\n    if (typeof value === 'number') {\n        return value;\n    }\n    \n    const result = parseFloat(value);\n    \n    // Check if the result is NaN (Not a Number)\n    if (isNaN(result)) {\n        node.warn(`Warning: Could not parse numeric value for topic: ${topic}. Value was: ${value}`);\n        return null;\n    }\n    \n    return result;\n}\n\n// Structure for writing to InfluxDB\nmsg.measurement = measurementName;\nmsg.payload = [\n    {\n        // Correct access path: payloadIn[topic].value\n        temperature: extractAndParse(tempTopic),\n        humidity: extractAndParse(humiTopic)\n    },\n    {\n        device: deviceTag\n    }\n];\n\n// Log the final payload for debugging. Check the Node-RED debug tab.\n// node.warn(JSON.stringify(msg.payload));\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 580,
+        "wires": [
+            [
+                "ad355e814c5fd41f"
+            ]
+        ]
+    },
+    {
+        "id": "ad355e814c5fd41f",
+        "type": "influxdb out",
+        "z": "af55de1cad2f4bbc",
+        "influxdb": "1a463d669d42977d",
+        "name": "InfluxDB iot_data 2",
+        "measurement": "",
+        "precision": "ms",
+        "retentionPolicy": "one_month",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 990,
+        "y": 580,
+        "wires": [],
+        "info": "Field 'measurment' is KEY to database. \r\nIn this case, the 'measurement' value is in msg paload:\r\n\r\ne.g.:\r\n[\r\n{\"temperature\":22.1,\"humidity\":70.8},\r\n{\"device\":\"home/thermometer/hall\"}\r\n]\r\n\r\ncode:\r\n\r\nmsg.measurement = measurementName;\r\nmsg.payload = [\r\n    {\r\n        // Correct access path: payloadIn[topic].value\r\n        temperature: extractAndParse(tempTopic),\r\n        humidity: extractAndParse(humTopic)\r\n    },\r\n    {\r\n        device: deviceTag\r\n    }\r\n];\r\n\r\n\r\ninflux\r\nUSE iot_data\r\nSELECT * FROM environment ORDER BY time DESC LIMIT 10\r\n\r\nwhere 'environment' is from msg.measurement"
+    },
+    {
+        "id": "d8cada7c994c76a5",
+        "type": "influxdb in",
+        "z": "af55de1cad2f4bbc",
+        "influxdb": "1a463d669d42977d",
+        "name": "Tech.Tmpr DB 7day",
+        "query": "SELECT mean(\"temperature\") \nFROM \"environment\" \nWHERE \"device\" = 'home/thermometer/pristavba' \n  AND time > now() - 7d \nGROUP BY time(30m) \nfill(null) \ntz('Europe/Bratislava')",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "organisation",
+        "x": 660,
+        "y": 900,
+        "wires": [
+            [
+                "d66b2c169c5c0efc"
+            ]
+        ]
+    },
+    {
+        "id": "d66b2c169c5c0efc",
+        "type": "function",
+        "z": "af55de1cad2f4bbc",
+        "name": "Tmpr IDB to Chart",
+        "func": "/*\n * Input Influx DB message format:\n * Based on: SELECT mean(\"temperature\") FROM \"environment\" WHERE time > now() - 7d GROUP BY time(30m) fill(null) tz('Europe/Bratislava')\n * --------------------------------------------------------------\n * [ ...\n * {\"time\":\"2025-11-09T18:00:00.000Z\",\"mean\":null},\n * {\"time\":\"2025-11-09T18:30:00.000Z\",\"mean\":null},\n * {\"time\":\"2025-11-09T19:00:00.000Z\",\"mean\":21.964823529411788},\n * {\"time\":\"2025-11-09T19:30:00.000Z\",\"mean\":21.859259259259243},\n * {\"time\":\"2025-11-09T20:00:00.000Z\",\"mean\":21.799594594594634},\n *   ... ]\n * \n * Output data format for Chart Node:\n * --------------------------------------------------------------\n * msg.topic = \"Temperature\"\n * msg.payload = \n * [\n *      {\"x\":1762714800000,\"y\":21.965},\n *      {\"x\":1762716600000,\"y\":21.859},\n *      {\"x\":1762718400000,\"y\":21.8},\n *      ...\n * ]\n * */\n\n// Array of objects in msg.payload\nconst data = msg.payload;\n\n// Name of series for chart (for legend)\nconst seriesName = \"Temperature\"; // 'Show Legend' must be enabled on Chart Node\n\n// Data conversion to output format:\nconst chartData = data\n    // 1. Filtration - remove data points with 'null' value\n    // (to avoid empty space in graph-line of the Chart node)\n    .filter(item => item.mean !== null && item.mean !== undefined)\n    \n    // 2. Mapping\n    .map(item => {\n        // Timestamp in mili-sec\n        const timestamp_ms = new Date(item.time).getTime();\n        \n        // Rounding the value of 'mean' to 3 decimal places\n        const roundedMean = parseFloat(item.mean.toFixed(3)); \n\n        // Creating an object for a chart\n        return {\n            //\"series\" : seriesName, - instead the 'msg.topic' is used\n            \"x\": timestamp_ms,\n            \"y\": roundedMean \n        };\n    });\n\n// Final object for Chart node\nmsg.payload = chartData\nmsg.topic = seriesName\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 900,
+        "wires": [
+            [
+                "85488c9310aab5d0"
+            ]
+        ]
+    },
+    {
+        "id": "85488c9310aab5d0",
+        "type": "ui-chart",
+        "z": "af55de1cad2f4bbc",
+        "group": "65780af9cfdc3e55",
+        "name": "Tech.Tmpr 7 days (DB)",
+        "label": "Tech.Temperature [C] per 7 days (from DB)",
+        "order": 7,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "x",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "y",
+        "yAxisPropertyType": "property",
+        "ymin": "",
+        "ymax": "",
+        "bins": 10,
+        "action": "replace",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": false,
+        "removeOlder": "7",
+        "removeOlderUnit": "86400",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "interpolation": "linear",
+        "x": 1170,
+        "y": 900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c0838c91e52e1028",
+        "type": "influxdb in",
+        "z": "af55de1cad2f4bbc",
+        "influxdb": "1a463d669d42977d",
+        "name": "Tech.Humi DB 7day",
+        "query": "SELECT mean(\"humidity\") \nFROM \"environment\" \nWHERE \"device\" = 'home/thermometer/pristavba' \n  AND time > now() - 7d \nGROUP BY time(30m) \nfill(null) \ntz('Europe/Bratislava')",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "organisation",
+        "x": 660,
+        "y": 980,
+        "wires": [
+            [
+                "d65e78bca31ff186"
+            ]
+        ]
+    },
+    {
+        "id": "d65e78bca31ff186",
+        "type": "function",
+        "z": "af55de1cad2f4bbc",
+        "name": "Humi IDB to Chart",
+        "func": "/*\n * Input Influx DB message format:\n * Based on: SELECT mean(\"humidity\") FROM \"environment\" WHERE time > now() - 7d GROUP BY time(30m) fill(null) tz('Europe/Bratislava')\n * --------------------------------------------------------------\n * [ ...\n *  {\"time\":\"2025-11-09T18:00:00.000Z\",\"mean\":null},\n *  {\"time\":\"2025-11-09T18:30:00.000Z\",\"mean\":null},\n *  {\"time\":\"2025-11-09T19:00:00.000Z\",\"mean\":72.38141176470586},\n *  {\"time\":\"2025-11-09T19:30:00.000Z\",\"mean\":72.39245791245794},\n *  {\"time\":\"2025-11-09T20:00:00.000Z\",\"mean\":72.10246621621624},\n *   ... ]\n * \n * Output data format for Chart Node:\n * --------------------------------------------------------------\n * msg.topic = \"Humidity\"\n * msg.payload = \n * [\n *      {\"x\":1762714800000,\"y\":72.381},\n *      {\"x\":1762716600000,\"y\":72.392},\n *      {\"x\":1762718400000,\"y\":72.102},\n *      ...\n * ]\n * */\n\n// Array of objects in msg.payload                                  \nconst data = msg.payload;\n\n// Name of series for chart (for legend)\nconst seriesName = \"Humidity\"; // 'Show Legend' must be enabled on Chart Node\n\n// Data conversion to output format:\nconst chartData = data\n    // 1. Filtration - remove data points with 'null' value\n    // (to avoid empty space in graph-line of the Chart node)\n    .filter(item => item.mean !== null && item.mean !== undefined)\n    \n    // 2. Mapping\n    .map(item => {\n        // Časová značka musí byť v milisekundách\n        const timestamp_ms = new Date(item.time).getTime();\n        \n        // Rounding the value of 'mean' to 3 decimal places\n        const roundedMean = parseFloat(item.mean.toFixed(3)); \n\n        // Creating an object for a chart\n        return {\n            //\"series\" : seriesName, - instead the 'msg.topic' is used\n            \"x\": timestamp_ms,\n            \"y\": roundedMean \n        };\n    });\n\n// Final object for Chart node\nmsg.payload = chartData\nmsg.topic = seriesName                      \n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 980,
+        "wires": [
+            [
+                "7db7adf566d28ca7"
+            ]
+        ]
+    },
+    {
+        "id": "7db7adf566d28ca7",
+        "type": "ui-chart",
+        "z": "af55de1cad2f4bbc",
+        "group": "65780af9cfdc3e55",
+        "name": "Tech.Humi 7 days (DB)",
+        "label": "Tech.Humidity [%] per 7 days (from DB)",
+        "order": 8,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "x",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "y",
+        "yAxisPropertyType": "property",
+        "ymin": "",
+        "ymax": "",
+        "bins": 10,
+        "action": "replace",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": false,
+        "removeOlder": "7",
+        "removeOlderUnit": "86400",
+        "removeOlderPoints": "",
+        "colors": [
+            "#ff0000",
+            "#0080ff",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "interpolation": "linear",
+        "x": 1170,
+        "y": 980,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "478e26bde1bb911e",
+        "type": "inject",
+        "z": "af55de1cad2f4bbc",
+        "name": "Request to DB",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "ReadDdata",
+        "payloadType": "str",
+        "x": 160,
+        "y": 820,
+        "wires": [
+            [
+                "d8cada7c994c76a5",
+                "c0838c91e52e1028",
+                "11225f6eeddfb81b",
+                "07058cd1016a8224"
+            ]
+        ],
+        "info": "## Description: \r\nTrigger request to DB with 1min cycle\r\n\r\n## Note: \r\nmsg.payload = (String)\"ReadDdata\" - is not relevant, it is ignored by next node (DB)."
+    },
+    {
+        "id": "11225f6eeddfb81b",
+        "type": "influxdb in",
+        "z": "af55de1cad2f4bbc",
+        "influxdb": "1a463d669d42977d",
+        "name": "Tech.Tmpr DB 3day",
+        "query": "SELECT mean(\"temperature\") \nFROM \"environment\" \nWHERE \"device\" = 'home/thermometer/pristavba' \n  AND time > now() - 3d \nGROUP BY time(20m) \nfill(null) \ntz('Europe/Bratislava')",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "organisation",
+        "x": 660,
+        "y": 740,
+        "wires": [
+            [
+                "6749141714f9131a"
+            ]
+        ],
+        "info": "Ak chcete oddeliť dáta a zobraziť priemernú teplotu len pre senzor v pristavbe, \r\nmusíte do dopytu pridať podmienku WHERE s identifikátorom zariadenia.\r\n\r\nTu je upravený príkaz:\r\nSQL\r\n\r\nSELECT mean(\"temperature\") \r\nFROM \"environment\" \r\nWHERE \"device\" = 'home/thermometer/pristavba' \r\n  AND time > now() - 3d \r\nGROUP BY time(20m) \r\nfill(null) \r\ntz('Europe/Bratislava')\r\n\r\nČo sa zmenilo?\r\n    -Pridal som podmienku \"device\" = 'home/thermometer/pristavba'.\r\n    -V InfluxDB sa táto podmienka spája s časovým rozsahom pomocou operátora AND.\r\n    -Dôležité je použiť jednoduché úvodzovky (') pre hodnotu tagu (názov zariadenia) \r\n    a dvojité úvodzovky (\") pre názvy polí a tagov (device, temperature), \r\n    ak obsahujú špeciálne znaky."
+    },
+    {
+        "id": "6749141714f9131a",
+        "type": "function",
+        "z": "af55de1cad2f4bbc",
+        "name": "Tmpr IDB to Chart",
+        "func": "/*\n * Input Influx DB message format:\n * Based on: SELECT mean(\"temperature\") FROM \"environment\" WHERE time > now() - 7d GROUP BY time(30m) fill(null) tz('Europe/Bratislava')\n * --------------------------------------------------------------\n * [ ...\n * {\"time\":\"2025-11-09T18:00:00.000Z\",\"mean\":null},\n * {\"time\":\"2025-11-09T18:30:00.000Z\",\"mean\":null},\n * {\"time\":\"2025-11-09T19:00:00.000Z\",\"mean\":21.964823529411788},\n * {\"time\":\"2025-11-09T19:30:00.000Z\",\"mean\":21.859259259259243},\n * {\"time\":\"2025-11-09T20:00:00.000Z\",\"mean\":21.799594594594634},\n *   ... ]\n * \n * Output data format for Chart Node:\n * --------------------------------------------------------------\n * msg.topic = \"Temperature\"\n * msg.payload = \n * [\n *      {\"x\":1762714800000,\"y\":21.965},\n *      {\"x\":1762716600000,\"y\":21.859},\n *      {\"x\":1762718400000,\"y\":21.8},\n *      ...\n * ]\n * */\n\n// Array of objects in msg.payload\nconst data = msg.payload;\n\n// Name of series for chart (for legend)\nconst seriesName = \"Temperature\"; // 'Show Legend' must be enabled on Chart Node\n\n// Data conversion to output format:\nconst chartData = data\n    // 1. Filtration - remove data points with 'null' value\n    // (to avoid empty space in graph-line of the Chart node)\n    .filter(item => item.mean !== null && item.mean !== undefined)\n    \n    // 2. Mapping\n    .map(item => {\n        // Timestamp in mili-sec\n        const timestamp_ms = new Date(item.time).getTime();\n        \n        // Rounding the value of 'mean' to 3 decimal places\n        const roundedMean = parseFloat(item.mean.toFixed(3)); \n\n        // Creating an object for a chart\n        return {\n            //\"series\" : seriesName, - instead the 'msg.topic' is used\n            \"x\": timestamp_ms,\n            \"y\": roundedMean \n        };\n    });\n\n// Final object for Chart node\nmsg.payload = chartData\nmsg.topic = seriesName\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 740,
+        "wires": [
+            [
+                "682c14481786b34f"
+            ]
+        ]
+    },
+    {
+        "id": "682c14481786b34f",
+        "type": "ui-chart",
+        "z": "af55de1cad2f4bbc",
+        "group": "65780af9cfdc3e55",
+        "name": "Tech.Tmpr 3 days (DB)",
+        "label": "Tech.Temperature [C] per 3 days (from DB)",
+        "order": 5,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "x",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "y",
+        "yAxisPropertyType": "property",
+        "ymin": "",
+        "ymax": "",
+        "bins": 10,
+        "action": "replace",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": false,
+        "removeOlder": "3",
+        "removeOlderUnit": "86400",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "interpolation": "linear",
+        "x": 1170,
+        "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "07058cd1016a8224",
+        "type": "influxdb in",
+        "z": "af55de1cad2f4bbc",
+        "influxdb": "1a463d669d42977d",
+        "name": "Tech.Humi DB 3day",
+        "query": "SELECT mean(\"humidity\") \nFROM \"environment\" \nWHERE \"device\" = 'home/thermometer/pristavba' \n  AND time > now() - 3d \nGROUP BY time(20m) \nfill(null) \ntz('Europe/Bratislava')",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "organisation",
+        "x": 660,
+        "y": 820,
+        "wires": [
+            [
+                "34dc873e2649dd9d"
+            ]
+        ]
+    },
+    {
+        "id": "34dc873e2649dd9d",
+        "type": "function",
+        "z": "af55de1cad2f4bbc",
+        "name": "Humi IDB to Chart",
+        "func": "/*\n * Input Influx DB message format:\n * Based on: SELECT mean(\"humidity\") FROM \"environment\" WHERE time > now() - 7d GROUP BY time(30m) fill(null) tz('Europe/Bratislava')\n * --------------------------------------------------------------\n * [ ...\n *  {\"time\":\"2025-11-09T18:00:00.000Z\",\"mean\":null},\n *  {\"time\":\"2025-11-09T18:30:00.000Z\",\"mean\":null},\n *  {\"time\":\"2025-11-09T19:00:00.000Z\",\"mean\":72.38141176470586},\n *  {\"time\":\"2025-11-09T19:30:00.000Z\",\"mean\":72.39245791245794},\n *  {\"time\":\"2025-11-09T20:00:00.000Z\",\"mean\":72.10246621621624},\n *   ... ]\n * \n * Output data format for Chart Node:\n * --------------------------------------------------------------\n * msg.topic = \"Humidity\"\n * msg.payload = \n * [\n *      {\"x\":1762714800000,\"y\":72.381},\n *      {\"x\":1762716600000,\"y\":72.392},\n *      {\"x\":1762718400000,\"y\":72.102},\n *      ...\n * ]\n * */\n\n// Array of objects in msg.payload                                  \nconst data = msg.payload;\n\n// Name of series for chart (for legend)\nconst seriesName = \"Humidity\"; // 'Show Legend' must be enabled on Chart Node\n\n// Data conversion to output format:\nconst chartData = data\n    // 1. Filtration - remove data points with 'null' value\n    // (to avoid empty space in graph-line of the Chart node)\n    .filter(item => item.mean !== null && item.mean !== undefined)\n    \n    // 2. Mapping\n    .map(item => {\n        // Časová značka musí byť v milisekundách\n        const timestamp_ms = new Date(item.time).getTime();\n        \n        // Rounding the value of 'mean' to 3 decimal places\n        const roundedMean = parseFloat(item.mean.toFixed(3)); \n\n        // Creating an object for a chart\n        return {\n            //\"series\" : seriesName, - instead the 'msg.topic' is used\n            \"x\": timestamp_ms,\n            \"y\": roundedMean \n        };\n    });\n\n// Final object for Chart node\nmsg.payload = chartData\nmsg.topic = seriesName                      \n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 820,
+        "wires": [
+            [
+                "8dad5a0a9e740b30"
+            ]
+        ]
+    },
+    {
+        "id": "8dad5a0a9e740b30",
+        "type": "ui-chart",
+        "z": "af55de1cad2f4bbc",
+        "group": "65780af9cfdc3e55",
+        "name": "Tech.Humi 3 days (DB)",
+        "label": "Tech.Humidity [%] per 3 days (from DB)",
+        "order": 6,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "x",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "y",
+        "yAxisPropertyType": "property",
+        "ymin": "",
+        "ymax": "",
+        "bins": 10,
+        "action": "replace",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": false,
+        "removeOlder": "3",
+        "removeOlderUnit": "86400",
+        "removeOlderPoints": "",
+        "colors": [
+            "#ff0000",
+            "#0080ff",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "interpolation": "linear",
+        "x": 1170,
+        "y": 820,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0e745f397e5b7cec",
+        "type": "mqtt-broker",
+        "name": "Pihol broker",
+        "broker": "192.168.241.111",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "65780af9cfdc3e55",
+        "type": "ui-group",
+        "name": "Sensor: Technical",
+        "page": "e5eeb32abd849f63",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": true,
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "1a463d669d42977d",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": 8086,
+        "protocol": "http",
+        "database": "iot_data",
+        "name": "iot_data DB",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "1.x",
+        "url": "http://localhost:8086",
+        "timeout": 10,
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "e5eeb32abd849f63",
+        "type": "ui-page",
+        "name": "LOLIN MINI",
+        "ui": "b9eab409d5cf2da1",
+        "path": "/LOLIN_MINI",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "4b1b44b1246133af",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 2,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "b9eab409d5cf2da1",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "fixed",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "4b1b44b1246133af",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "a5f58b9ef55b5149",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-node-smooth": "0.1.2",
+            "@flowfuse/node-red-dashboard": "1.29.0",
+            "node-red-contrib-influxdb": "0.7.0"
+        }
+    }
+]
